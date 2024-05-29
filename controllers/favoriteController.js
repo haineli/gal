@@ -1,4 +1,4 @@
-const { Favorite, Book } = require('../models/models');
+const { Favorite, Picture } = require('../models/models');
 
 /**
  * @swagger
@@ -23,11 +23,11 @@ const { Favorite, Book } = require('../models/models');
  *             properties:
  *               userId:
  *                 type: integer
- *               bookId:
+ *               pictureId:
  *                 type: integer
  *             required:
  *               - userId
- *               - bookId
+ *               - pictureId
  *     responses:
  *       201:
  *         description: Успешное добавление книги в список избранных.
@@ -55,11 +55,11 @@ const { Favorite, Book } = require('../models/models');
  *             properties:
  *               userId:
  *                 type: integer
- *               bookId:
+ *               pictureId:
  *                 type: integer
  *             required:
  *               - userId
- *               - bookId
+ *               - pictureId
  *     responses:
  *       200:
  *         description: Книга успешно удалена из списка избранных.
@@ -72,20 +72,20 @@ const { Favorite, Book } = require('../models/models');
 class FavoritesController {
     async addToFavorites(req, res, next) {
         try {
-            const { userId, bookId } = req.body;
+            const { userId, pictureId } = req.body;
 
-            const book = await Book.findByPk(bookId);
-            if (!book) {
+            const picture = await Picture.findByPk(pictureId);
+            if (!picture) {
                 return res.status(404).json({ message: "Книга не найдена" });
             }
 
-            const existingFavorite = await Favorite.findOne({ where: { userId, bookId } });
+            const existingFavorite = await Favorite.findOne({ where: { userId, pictureId } });
 
             if (existingFavorite) {
                 return res.status(400).json({ message: "Книга уже добавлена в избранное" });
             }
 
-            const newFavorite = await Favorite.create({ userId, bookId });
+            const newFavorite = await Favorite.create({ userId, pictureId });
 
             return res.status(201).json(newFavorite);
         } catch (error) {
@@ -95,9 +95,9 @@ class FavoritesController {
 
     async removeFromFavorites(req, res, next) {
         try {
-            const { userId, bookId } = req.body;
+            const { userId, pictureId } = req.body;
 
-            const favorite = await Favorite.findOne({ where: { userId, bookId } });
+            const favorite = await Favorite.findOne({ where: { userId, pictureId } });
 
             if (!favorite) {
                 return res.status(404).json({ message: "Книга не найдена в списке избранных" });

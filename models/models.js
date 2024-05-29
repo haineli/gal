@@ -1,7 +1,7 @@
 const sequelize = require('../db')
 const { DataTypes } = require('sequelize');
 
-const User = sequelize.define('user', {
+const User = sequelize.define('users', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -34,7 +34,7 @@ const Favorite = sequelize.define('favorite', {
     type: DataTypes.INTEGER,
     allowNull: false
   },
-  pictureId: {  // Изменено bookId на pictureId
+  pictureId: {  // Изменено pictureId на pictureId
     type: DataTypes.INTEGER,
     allowNull: false
   }
@@ -88,7 +88,7 @@ const TypeSink = sequelize.define('typesink', {
     type: DataTypes.INTEGER,
     allowNull: false
   },
-  pictureId: {  // Изменено bookId на pictureId
+  pictureId: {  // Изменено pictureId на pictureId
     type: DataTypes.INTEGER,
     allowNull: false
   }

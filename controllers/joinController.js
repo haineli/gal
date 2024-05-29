@@ -10,7 +10,7 @@ const ApiError = require('../error/ApiError');
 
 /**
  * @swagger
- * /api/users/favorite-pictures/{authorName}:
+ * /api/users/favorite/{authorName}:
  *   get:
  *     summary: Получить пользователей с избранными картинами по имени автора
  *     description: >

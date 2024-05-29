@@ -1,4 +1,4 @@
-//bookController.js
+//pictureController.js
 const { Picture } = require('../models/models');
 
 /**
@@ -148,8 +148,8 @@ const { Picture } = require('../models/models');
 // Получить список всех книг
 async function getAllPicture(req, res, next) {
     try {
-        const books = await Picture.findAll();
-        res.status(200).json(books);
+        const pictur = await Picture.findAll();
+        res.status(200).json(pictur);
     } catch (error) {
         next(error);
     }
@@ -159,11 +159,11 @@ async function getAllPicture(req, res, next) {
 async function getPictureById(req, res, next) {
     const { id } = req.params;
     try {
-        const book = await Picture.findByPk(id);
-        if (!book) {
+        const picture = await Picture.findByPk(id);
+        if (!picture) {
             return res.status(404).json({ message: 'Картина не найдена' });
         }
-        res.status(200).json(book);
+        res.status(200).json(picture);
     } catch (error) {
         next(error);
     }
@@ -173,8 +173,8 @@ async function getPictureById(req, res, next) {
 async function createPicture(req, res, next) {
     const { title, author, description } = req.body;
     try {
-        const newBook = await Picture.create({ title, author, description });
-        res.status(201).json(newBook);
+        const newpicture = await Picture.create({ title, author, description });
+        res.status(201).json(newpicture);
     } catch (error) {
         next(error);
     }
@@ -185,15 +185,15 @@ async function updatePicture(req, res, next) {
     const { id } = req.params;
     const { title, author, description } = req.body;
     try {
-        const book = await Picture.findByPk(id);
-        if (!book) {
+        const picture = await Picture.findByPk(id);
+        if (!picture) {
             return res.status(404).json({ message: 'Картина не найдена' });
         }
-        book.title = title;
-        book.author = author;
-        book.description = description;
-        await book.save();
-        res.status(200).json(book);
+        picture.title = title;
+        picture.author = author;
+        picture.description = description;
+        await picture.save();
+        res.status(200).json(picture);
     } catch (error) {
         next(error);
     }
@@ -203,11 +203,11 @@ async function updatePicture(req, res, next) {
 async function deletePicture(req, res, next) {
     const { id } = req.params;
     try {
-        const book = await Picture.findByPk(id);
-        if (!book) {
+        const picture = await Picture.findByPk(id);
+        if (!picture) {
             return res.status(404).json({ message: 'Картина не найдена' });
         }
-        await book.destroy();
+        await picture.destroy();
         res.status(200).json({ message: 'Картина успешно удалена' });
     } catch (error) {
         next(error);
