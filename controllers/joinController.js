@@ -10,7 +10,7 @@ const ApiError = require('../error/ApiError');
 
 /**
  * @swagger
- * /api/users/favorite/{authorName}:
+ * /api/join/users/favorite/{authorName}:
  *   get:
  *     summary: Получить пользователей с избранными картинами по имени автора
  *     description: >
@@ -75,7 +75,6 @@ const ApiError = require('../error/ApiError');
  *                     type: string
  *                     description: Описание картины.
  */
-
 class JoinController {
   async getUsersWithFavoritePicturesByAuthor(req, res, next) {
     const { authorName } = req.params;
